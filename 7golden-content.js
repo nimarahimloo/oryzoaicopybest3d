@@ -235,9 +235,9 @@
       while (walker.nextNode()) nodes.push(walker.currentNode);
       for (const node of nodes) {
         const v = node.nodeValue;
-        const next = v.replace(/Intro/g, 'Our story')
-          .replace(/Features/g, 'Ingredients')
-          .replace(/Product/g, 'Products')
+        const next = v.replace(/\\bIntro\\b/g, 'Our story')
+          .replace(/\\bFeatures\\b/g, 'Ingredients')
+          .replace(/\\bProduct\\b/g, 'Products')
           .replace(/Contact/g, 'Contact')
           .replace(/hello@lusion\.co/gi, CONTACT.email)
           .replace(/general enquires:/gi, 'Sales enquiries:');
@@ -260,13 +260,13 @@
     for (const [selector, value] of Object.entries(copy)) setText(selector, value);
     // Preserve deliberate line breaks in selected display headings.
     const heroHeading = document.querySelector('#hero-card-header');
-    if (heroHeading) heroHeading.innerHTML = 'From Qazvin,<br>to food manufacturers.';
+    if (heroHeading && heroHeading.innerHTML !== 'From Qazvin,<br>to food manufacturers.') heroHeading.innerHTML = 'From Qazvin,<br>to food manufacturers.';
     const aiPre = document.querySelector('#ai-pre h2');
-    if (aiPre) aiPre.innerHTML = 'More than<br>just a nut.';
+    if (aiPre && aiPre.innerHTML !== 'More than<br>just a nut.') aiPre.innerHTML = 'More than<br>just a nut.';
     const wearableHeading = document.querySelector('#wearable-title');
-    if (wearableHeading) wearableHeading.innerHTML = '<span>From whole nuts,</span> <span>to versatile ingredients</span>';
+    if (wearableHeading && !/From whole nuts/.test(wearableHeading.textContent)) wearableHeading.innerHTML = '<span>From whole nuts,</span> <span>to versatile ingredients</span>';
     const footerTitle = document.querySelector('#footer-title');
-    if (footerTitle) footerTitle.textContent = 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.';
+    if (footerTitle && footerTitle.textContent !== 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.') footerTitle.textContent = 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.';
     updateMetadata();
     updateNavigationAndContact();
     replaceHeroLogo();
