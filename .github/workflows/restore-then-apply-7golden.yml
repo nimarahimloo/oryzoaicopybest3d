@@ -1,0 +1,40 @@
+name: Restore original markup and apply 7Golden copy
+
+on:
+  push:
+    paths:
+      - '.github/workflows/restore-then-apply-7golden.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore known-good original index
+        run: git show 0b6590cd71a33be0824c2b48ece5d666953a9c15:index.html > index.html
+
+      - name: Add safe content script
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          marker = '<script src="/7golden-content.js"></script>'
+          if marker not in s:
+              s = s.replace('</head>', marker + '</head>', 1)
+          p.write_text(s)
+          PY
+
+      - name: Commit fixed page
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'Restore original markup and apply 7Golden copy safely'
+          git push
