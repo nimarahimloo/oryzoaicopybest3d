@@ -145,7 +145,8 @@
     ['general enquires:', 'Contact:'],
     ['Terms & Conditions', 'Product information'],
     ['Privacy Policy', 'Contact details'],
-    ['Scroll to continue', 'Scroll to explore']
+    ['Scroll to continue', 'Scroll to explore'],
+    ['This entire site is a fictional creative project by Lusion. Oryzo doesn\'t exist.  No products are for sale. All claims are satirical and for entertainment purposes only.', '7Golden is a nut-processing business based in Qazvin, Iran. Contact our team for current product specifications and availability.']
   ]);
 
   function setText(selector, value) {
@@ -263,6 +264,42 @@
         if (productOptions[index].textContent !== label) productOptions[index].textContent = label;
       });
     }
+    const productTitles = document.querySelectorAll('#product-details-title-wrapper span');
+    if (productTitles.length >= 3) {
+      ['Hazelnut', 'Pistachio', 'Almond'].forEach((label, index) => {
+        if (productTitles[index].textContent !== label) productTitles[index].textContent = label;
+      });
+    }
+    const productDescriptions = document.querySelectorAll('#product-details-desc-wrapper > div');
+    const descriptions = [
+      'Hazelnut products include kernels and processed forms such as paste, granules and powder, depending on availability.',
+      'Pistachio products include kernels, peeled kernels, slivers and powder, depending on availability.',
+      'Almond products include kernels and processed forms such as slivers, flakes and powder, depending on availability.'
+    ];
+    if (productDescriptions.length >= 3) descriptions.forEach((value, index) => {
+      if (productDescriptions[index].children.length === 0 && productDescriptions[index].textContent !== value) productDescriptions[index].textContent = value;
+    });
+    const newsletterForm = document.querySelector('#footer-newsletter-form');
+    if (newsletterForm) newsletterForm.style.display = 'none';
+    const newsletterLabel = document.querySelector('#footer-newsletter-label');
+    if (newsletterLabel && newsletterLabel.textContent !== 'Contact 7Golden') newsletterLabel.textContent = 'Contact 7Golden';
+    const footerEmail = document.querySelector('#footer-email');
+    if (footerEmail && !footerEmail.querySelector('[data-7golden-contact="true"]')) {
+      const contact = document.createElement('div');
+      contact.setAttribute('data-7golden-contact', 'true');
+      contact.className = 'sub2';
+      contact.style.cssText = 'display:flex;flex-direction:column;gap:10px;margin-top:12px;line-height:1.7';
+      contact.innerHTML = '<a href="tel:+982833234004">Office: +98 28 3323 4004</a><a href="https://wa.me/989121823438" target="_blank" rel="noopener noreferrer">Mobile / WhatsApp: +98 912 182 3438</a><a href="mailto:info@7golden.co">info@7golden.co</a>';
+      footerEmail.appendChild(contact);
+    }
+    const fakeReviews = document.querySelector('#testimonies-table-list');
+    if (fakeReviews) fakeReviews.style.display = 'none';
+    const fakeRatings = document.querySelectorAll('#testimonies .testimonies-table-rating');
+    fakeRatings.forEach((rating) => { rating.style.display = 'none'; });
+    const openWeightSection = document.querySelector('#open-weight');
+    if (openWeightSection) openWeightSection.style.display = 'none';
+    const socialLinks = document.querySelector('#footer-social-wrapper');
+    if (socialLinks) socialLinks.style.display = 'none';
     updateMetadata();
     updateNavigationAndContact();
     replaceHeroLogo();
