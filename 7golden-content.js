@@ -142,6 +142,8 @@
     ["Subscribe to Lusion's Newsletter:", 'Contact 7Golden:'],
     ['New Business:', 'Sales enquiries:'],
     ['hello@lusion.co', CONTACT.email],
+    ['business@lusion.co', CONTACT.email],
+    ['General Enquires:', 'Sales enquiries:'],
     ['general enquires:', 'Contact:'],
     ['Terms & Conditions', 'Product information'],
     ['Privacy Policy', 'Contact details'],
