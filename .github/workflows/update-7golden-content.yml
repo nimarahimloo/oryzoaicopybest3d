@@ -1,0 +1,159 @@
+name: Update 7Golden content
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-7golden-content.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace page copy
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          replacements = {
+            '<title>ORYZO AI</title>':'<title>7Golden | Premium Iranian Nuts & Dried Fruits</title>',
+            'A physical product, reimagined for the AI era, proving even the smallest idea can feel extraordinary.':'Premium Iranian nuts and dried fruits, carefully selected for quality, freshness, and authentic taste.',
+            '<meta name="author" content="Lusion">':'<meta name="author" content="7Golden">',
+            'https://oryzo.ai/':'https://7golden.co/',
+            '<meta name="apple-mobile-web-app-title" content="ORYZO AI">':'<meta name="apple-mobile-web-app-title" content="7Golden">',
+            '<meta property="og:title" content="ORYZO AI">':'<meta property="og:title" content="7Golden | Premium Iranian Nuts & Dried Fruits">',
+            '<meta property="og:site_name" content="ORYZO AI">':'<meta property="og:site_name" content="7Golden">',
+            '<meta name="twitter:title" content="ORYZO AI">':'<meta name="twitter:title" content="7Golden | Premium Iranian Nuts & Dried Fruits">',
+            'Made for mugs. Built for tables.':'Premium Iranian Nuts & Dried Fruits',
+            'Designed to lift, insulate, and grip in all the right ways. Oryzo makes the simplest moment feel considered.':'Carefully selected pistachios, hazelnuts, and almonds, bringing the natural richness of Iran to every table.',
+            'Designed<br> by Lusion,<br> the award-winning<br> design studio.':'Selected<br> with care.<br> Rooted in Iran.<br> Made for quality.',
+            '<span>The world\'s most</span><span> unnecessarily</span><span> sophisticated cork coaster.</span>':'<span>Premium Iranian</span><span> nuts and</span><span> dried fruits.</span>',
+            'isn’t just <br>a coaster.':'isn’t just <br>a nut.',
+            '<span>Oryzo isn’t just a </span><span>coaster. It’s the result </span><span>of unprecedented AI* </span><span>breakthroughs.</span>':'<span>7Golden brings together </span><span>careful selection, authentic </span><span>Iranian products, and </span><span>consistent quality.</span>',
+            'Powered by AI<sup>*</sup>':'Naturally Premium',
+            'Oryzo-1':'7Golden',
+            'Try to hover hand':'Explore our products',
+            '<span>AI fills in the gaps.</span><span> We said high five.</span><span> It heard six.</span>':'<span>From pistachios to hazelnuts.</span><span> From almonds to dried fruits.</span><span> Quality starts with selection.</span>',
+            '<span>* Adobe</span><span> Illustrator</span>':'<span>Quality</span><span> starts at selection.</span>',
+            '<span>So portable,</span> <span>it\'s wearable</span>':'<span>Rich in flavor,</span> <span>ready to share</span>',
+            'This stunt was performed by professionals.<br>Do not attempt this at home.':'Carefully selected products.<br>Enjoy naturally.',
+            'Hey <span><span>@</span>oryzo</span>, can you put on a bikini?':'Which 7Golden product would you choose?',
+            'ISSUE NO. 00124':'7GOLDEN COLLECTION',
+            'AI SLOP IDEAS<br>FOR THIS<br>WINTER':'PREMIUM NUTS<br>FROM<br>IRAN',
+            'We Are So':'Naturally',
+            'Cooked!':'Premium!',
+            '<span>Oryzo is taking everyone\'s jobs...</span><span>and replacing them with AI!</span>':'<span>Selected for authentic taste...</span><span>and made to be shared.</span>',
+            'ORYZO-1</div> <div id="wearable-magazine-corner-desc"><span>An open-weight model designed to be</span><span>lightweight and easy to carry.':'7GOLDEN</div> <div id="wearable-magazine-corner-desc"><span>Premium Iranian nuts and dried fruits.</span><span>Carefully selected for quality and freshness.',
+            'Rise above mediocrity':'Selected with Care',
+            'With a precision-engineered lift (exactly one coaster thick), Oryzo doesn’t just hold your mug - it elevates it. Literally. Above every boring surface you’ve ever known.':'We carefully select premium nuts and dried fruits with attention to quality, freshness, and consistent taste.',
+            'Elevate your coffee experience':'Discover 7Golden quality',
+            'Handles Extremes with Ease':'Natural Richness',
+            'From piping-hot mugs to ice-cold drinks - Oryzo stays perfectly stable. Your coffee table already tapped out three sips ago.':'Naturally rich in flavor and texture, our products reflect the distinctive character of Iranian nuts and dried fruits.',
+            'Thermodynamic stability':'Authentic Taste',
+            'Perfectly Round, Seriously':'Rooted in Iran',
+            'Our engineers recalibrated its circumference with disturbing levels of attention to detail - just because we could.':'Our products are rooted in Iran’s rich agricultural tradition and selected with care for an authentic experience.',
+            'Now 37.9% More Circular':'Quality You Can Taste',
+            'Secure communications simplified':'Carefully Selected',
+            'Smart flip <br>encryption':'Quality from <br>selection',
+            'Write a message. Flip. Instantly secure - until <br>someone flips it back. Genius.':'We focus on careful selection and handling to preserve natural flavor, texture, and freshness.',
+            'ORYZO':'7GOLDEN',
+            'Precision Grip, Zero Drama':'Natural Quality, No Drama',
+            'Grip-locked Antislip<br>technology':'Carefully Selected<br>for Quality',
+            'Micro-textured cork so grippy your drink files <br>a restraining order against gravity. Spills? <br>Consider them politely discouraged.':'Premium nuts and dried fruits selected for their natural flavor, texture, and freshness.',
+            'Friction coefficient (est):':'Quality standard:',
+            '0.80':'Premium',
+            '100% Plant-based':'Naturally Selected',
+            'Vegan-friendly':'Premium Products',
+            'sustainability':'Natural Richness',
+            'Pure cork sourced sustainably. <br>Completely vegan - no cows were harmed, <br>but it might be full of "bull"sh*t.':'Carefully selected nuts and dried fruits from Iran.<br>Handled with care to preserve natural flavor,<br>texture, and freshness.',
+            'Average <br>age of first <br>harvest':'Pistachio',
+            'Cork oaks are typically first harvested at around 25 years, once the bark is thick enough to remove safely.':'A distinctive Iranian favorite, known for its rich flavor, natural crunch, and exceptional quality.',
+            'Harvesting <br>interval':'Hazelnut',
+            'After each harvest, the bark takes about 9 years to regrow, making cork a renewable material.':'Naturally rich and flavorful, selected for texture and satisfying taste.',
+            'Power draw <br>while in use':'Almond',
+            'No compute. No tokens. So you can say “please” and “thank you” as much as you want, guilt free.':'A classic natural choice, carefully selected for quality and freshness.',
+            'People all around the world love Oryzo':'Discover the 7Golden Collection',
+            'Do not take our word for it, see what people say after living with Oryzo.':'Explore premium Iranian nuts and dried fruits selected with care.',
+            'Rating & Reviews':'7Golden Quality',
+            'Custom reviews [ 364 ]':'Premium selection',
+            '[ 4.9/5 ]':'Iranian origin',
+            'ORYZO in use':'7Golden in every bite',
+            'Choose you own':'Choose your favorite',
+            'ORYZO Pro':'Hazelnut',
+            'ORYZO Pro Max':'Almond',
+            'The original. Refined until it feels inevitable. Lifts just enough, grips just right, and quietly disappears into your day like it was never there.':'A distinctive Iranian favorite with rich flavor and a satisfying natural crunch.',
+            'A little more presence. Double the cork, double the confidence - without losing the plot.':'Naturally rich and flavorful, selected for texture and a satisfying taste.',
+            'Maximum stack for maximum unnecessary satisfaction. A bold little pedestal for your mug and a quiet flex for the whole desk.':'A classic natural choice, carefully selected for quality and freshness.',
+            'Single layer lift':'Pistachio',
+            'Double stack lift':'Hazelnut',
+            'Triple stack lift':'Almond',
+            'Natural cork insulation':'Natural flavor',
+            'More mass, more steadiness':'Authentic taste',
+            'Extra insulation by design':'Careful selection',
+            'Stable grip on everyday surfaces':'Premium quality',
+            'Designed to be stardout':'Rooted in Iran',
+            'Deployable on RTX 3090, on device':'Made for every table',
+            'New':'Premium',
+            'One coaster. One job. Done beautifully.':'Premium pistachios, carefully selected.',
+            'Twice the cork. Twice the commitment. Still effortless.':'Naturally rich hazelnuts, selected with care.',
+            'Three layers of confidence. For people who like their coffee slightly above it all.':'Classic almonds with natural flavor and freshness.',
+            'Stack:':'Product:',
+            'Lift:':'Origin:',
+            '1 coaster thick':'Iran',
+            '2 coasters thick':'Iran',
+            '3 coasters thick':'Iran',
+            'Material:':'Quality:',
+            'Cork':'Premium',
+            'Connectivity:':'Selection:',
+            'None':'Carefully selected',
+            'Pairing:':'Taste:',
+            'Not Required':'Authentic',
+            'Updates:':'Freshness:',
+            'Never':'Carefully handled',
+            'Best for:':'Best for:',
+            'Daily mugs and quiet desks':'Everyday enjoyment',
+            'Taller cups and extra stability':'Sharing with family and friends',
+            'Maximum lift and maximum presence':'Premium gifting and entertaining',
+            'Our SOTA Open Weight model':'Our Product Range',
+            'Paper':'About 7Golden',
+            'MODEL (.OBJ)':'PRODUCTS',
+            'Code coming soon':'Contact us',
+            'We present <span>Oryzo-1</span>, an open-weight 3D model of a cork coaster for rendering, simulation, and gloriously unnecessary research. Oryzo-1 faithfully reproduces key coaster behaviors - table protection, perfect circularity, and passive thermal moderation under everyday beverage conditions. Released in clean OBJ format with baseline results on our own WoodenBench (a standardized evaluation suite conducted on a single desk and very possibly rigged by us). Limitations include heavy dependency on gravity, mugs, and human deployment.':'7Golden brings premium Iranian nuts and dried fruits to customers who value authentic taste and consistent quality. Our focus is simple: carefully selected products, handled with care, and made to reflect the natural richness of Iran.',
+            'Acknowledgements':'About 7Golden',
+            'This website was single-shot espresso’d into existence by the creative team at Lusion.':'7Golden is rooted in Iran and focused on premium nuts and dried fruits, including pistachio, hazelnut, and almond.',
+            'Peer Review':'Contact',
+            '"Oryzo-1 A0B is the best model out there. <span>Trust me bro</span>."<br><span class="open-weight-article-small">- Anonymous LocalLLaMA Reddit user</span>':'For product inquiries, business opportunities, and distribution, contact the 7Golden team.',
+            '@misc{oryzo2026,':'7Golden — Premium Iranian Nuts & Dried Fruits',
+            'We caught your attention with a non-existent product.':'Premium Iranian nuts and dried fruits.',
+            'If we can sell a coaster, imagine what we can do for your brand.':'Selected with care. Made to be shared.',
+            'lusion.co':'7golden.co',
+            'Built by <a href="https://lusion.co/" target="_blank">Lusion</a><br>with love':'7Golden<br>with care',
+            'Subscribe to Lusion\'s Newsletter:':'Stay connected with 7Golden:',
+            'New Business:':'Business:',
+            'business@lusion.co':'info@7golden.co',
+            'General Enquires:':'General Inquiries:',
+            'hello@lusion.co':'info@7golden.co',
+            'https://x.com/lusionltd':'https://7golden.co/',
+            'https://www.instagram.com/lusionltd':'https://www.instagram.com/goldnuts7',
+            'https://www.linkedin.com/company/lusionltd':'https://7golden.co/',
+            'This entire site is a fictional creative project by Lusion. Oryzo doesn\'t exist.  No products are for sale. All claims are satirical and for entertainment purposes only.':'7Golden — Premium Iranian Nuts & Dried Fruits. Qazvin, Iran. Phone: +98 28 3323 4004. Mobile / WhatsApp: +98 912 182 3438. Email: info@7golden.co',
+            'Features':'Products',
+            'Product':'Collection',
+            'Oryzo-1 Model':'7Golden Collection',
+            'Scroll to continue':'Scroll to explore'
+          }
+          for a,b in replacements.items():
+              s = s.replace(a,b)
+          p.write_text(s)
+          PY
+      - name: Commit changes and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/update-7golden-content.yml
+          git commit -m "Replace page copy with 7Golden content"
+          git rm .github/workflows/update-7golden-content.yml
+          git commit -m "Remove temporary content update workflow"
+          git push
