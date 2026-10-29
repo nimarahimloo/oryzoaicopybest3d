@@ -187,19 +187,13 @@
     const original = host.querySelector('svg');
     if (!original || host.querySelector('[data-7golden-logo="true"]')) return;
 
-    const logo = document.createElement('div');
+    // Keep the original layout box and replace only its visible mark.
+    const logo = document.createElement('img');
     logo.setAttribute('data-7golden-logo', 'true');
-    logo.textContent = BRAND;
-    logo.setAttribute('aria-label', BRAND);
-    const rect = original.getBoundingClientRect();
-    const style = getComputedStyle(original);
-    logo.style.cssText = [
-      'display:flex', 'align-items:center', 'justify-content:center',
-      'width:100%', 'height:100%', 'font-family:inherit',
-      'font-size:' + (rect.height > 0 ? Math.max(24, rect.height * 0.72) : 72) + 'px',
-      'font-weight:700', 'line-height:1', 'letter-spacing:-0.06em',
-      'white-space:nowrap', 'color:' + style.color, 'box-sizing:border-box'
-    ].join(';');
+    logo.setAttribute('src', '/assets/7golden-wordmark.svg');
+    logo.setAttribute('alt', '7Golden');
+    logo.setAttribute('role', 'img');
+    logo.style.cssText = 'display:block;width:100%;height:100%;object-fit:contain;object-position:left center;';
     original.style.display = 'none';
     host.appendChild(logo);
   }
