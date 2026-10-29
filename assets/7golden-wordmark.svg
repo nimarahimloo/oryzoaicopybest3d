@@ -1,7 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 809 174" role="img" aria-labelledby="title desc">
   <title id="title">7Golden</title>
   <desc id="desc">7Golden wordmark</desc>
-  <g fill="currentColor">
-    <text x="8" y="132" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="142" font-weight="900" letter-spacing="-5">7GOLDEN</text>
-  </g>
+  <text x="8" y="132" textLength="790" lengthAdjust="spacingAndGlyphs" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="142" font-weight="900" letter-spacing="-5" fill="#fff">7GOLDEN</text>
 </svg>
