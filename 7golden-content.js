@@ -256,7 +256,7 @@
     const wearableHeading = document.querySelector('#wearable-title');
     if (wearableHeading && !/From whole nuts/.test(wearableHeading.textContent)) wearableHeading.innerHTML = '<span>From whole nuts,</span> <span>to versatile ingredients</span>';
     const footerTitle = document.querySelector('#footer-title');
-    if (footerTitle && footerTitle.textContent !== 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.') footerTitle.textContent = 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.';
+    if (footerTitle && footerTitle.children.length === 0 && footerTitle.textContent !== 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.') footerTitle.textContent = 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.';
     const productOptions = document.querySelectorAll('#product-hero-options > *');
     if (productOptions.length >= 3) {
       ['Hazelnut', 'Pistachio', 'Almond'].forEach((label, index) => {
