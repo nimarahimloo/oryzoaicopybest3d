@@ -216,7 +216,7 @@
     const appTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
     if (appTitle) appTitle.setAttribute('content', BRAND);
     const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical && /oryzo\.ai/i.test(canonical.href)) canonical.remove();
+    if (canonical) canonical.href = 'https://7golden.co/';
   }
 
   function updateNavigationAndContact() {
@@ -227,9 +227,9 @@
       while (walker.nextNode()) nodes.push(walker.currentNode);
       for (const node of nodes) {
         const v = node.nodeValue;
-        const next = v.replace(/\\bIntro\\b/g, 'Our story')
-          .replace(/\\bFeatures\\b/g, 'Ingredients')
-          .replace(/\\bProduct\\b/g, 'Products')
+        const next = v.replace(/\bIntro\b/g, 'Our story')
+          .replace(/\bFeatures\b/g, 'Ingredients')
+          .replace(/\bProduct\b/g, 'Products')
           .replace(/Contact/g, 'Contact')
           .replace(/hello@lusion\.co/gi, CONTACT.email)
           .replace(/general enquires:/gi, 'Sales enquiries:');
