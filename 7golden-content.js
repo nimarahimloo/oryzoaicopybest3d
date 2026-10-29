@@ -14,7 +14,6 @@
     '#hero-top-tagline': 'Processed Nuts. Made for Food Makers.',
     '#hero-copy': 'From selected hazelnuts, pistachios and almonds to versatile food ingredients, 7Golden helps manufacturers find the right form for their recipes and production needs.',
     '#hero-card-header': 'From Qazvin\nto food manufacturers.',
-    '#hero-card-desc': 'Processed hazelnut, pistachio and almond ingredients.',
     '#ai-pre h2': 'More than\njust a nut.',
     '#ai-title': 'Ingredients, thoughtfully processed',
     '#ai-tagline': 'Hazelnut · Pistachio · Almond',
@@ -35,17 +34,13 @@
     '#grip-desc': 'Our range includes hazelnut, pistachio and almond products in different processed forms for food manufacturers and confectionery businesses.',
     '#sustainability-title': 'Focused on nut processing',
     '#sustainability-desc': '7Golden processes hazelnut, pistachio and almond products in Qazvin, Iran, serving applications across confectionery, bakery and other food production.',
-    '#testimonies-table-header-center': 'Product range',
-    '#testimonies-table-header-right': 'Ingredients at a glance',
     '#social-content': 'For food makers\nIngredients for real production needs.',
     '#always_on': 'A family business\nRooted in Qazvin since 1956',
     '#3090': 'Processing experience\nNut processing since 1998',
     '#perfect': 'Officially established\nCompany registration in 2017',
     '#drop_test': 'Product formats\nKernels, slivers, flakes, powder, granules and pastes',
     '#legacy_support': 'Built on experience\nA family history in the nut trade',
-    '#product-hero-options': 'Hazelnut · Pistachio · Almond',
     '#footer-title': 'Looking for a nut ingredient supplier?\nLet’s discuss what your production needs.',
-    '#footer-email': 'Contact 7Golden:',
     '#scroll-indicator__bar-text': '7Golden Ingredients'
   };
 
@@ -155,7 +150,7 @@
 
   function setText(selector, value) {
     const el = document.querySelector(selector);
-    if (el && el.textContent !== value) el.textContent = value;
+    if (el && el.children.length === 0 && el.textContent !== value) el.textContent = value;
   }
 
   function replaceTextNodes() {
@@ -248,11 +243,6 @@
     for (const link of document.querySelectorAll('a[href*="lusion.co"], a[href^="mailto:hello@"]')) {
       link.href = link.href.startsWith('mailto:') ? 'mailto:' + CONTACT.email : 'https://7golden.co/';
     }
-    for (const el of document.querySelectorAll('a, button')) {
-      if (el.textContent.trim() === 'Contact') {
-        if (el.tagName === 'A') el.href = 'mailto:' + CONTACT.email;
-      }
-    }
   }
 
   function apply() {
@@ -267,6 +257,12 @@
     if (wearableHeading && !/From whole nuts/.test(wearableHeading.textContent)) wearableHeading.innerHTML = '<span>From whole nuts,</span> <span>to versatile ingredients</span>';
     const footerTitle = document.querySelector('#footer-title');
     if (footerTitle && footerTitle.textContent !== 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.') footerTitle.textContent = 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.';
+    const productOptions = document.querySelectorAll('#product-hero-options > *');
+    if (productOptions.length >= 3) {
+      ['Hazelnut', 'Pistachio', 'Almond'].forEach((label, index) => {
+        if (productOptions[index].textContent !== label) productOptions[index].textContent = label;
+      });
+    }
     updateMetadata();
     updateNavigationAndContact();
     replaceHeroLogo();
