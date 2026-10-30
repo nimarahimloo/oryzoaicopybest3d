@@ -18,9 +18,9 @@ window.SEVENGOLDEN_DATA = Object.freeze({
   },
   applications: ["Chocolate", "Confectionery", "Bakery", "Ice cream", "Food manufacturing"],
   categories: [
-    { id: "pistachio", name: "Pistachio", image: "/images/7golden/pistachio-category.webp", description: "Pistachio kernels, peeled kernels, slivers and powder for chocolate, confectionery, ice cream and other food applications." },
-    { id: "hazelnut", name: "Hazelnut", image: "/images/7golden/hazelnut-category.webp", description: "Raw and roasted hazelnut kernels, paste, granules and powder for chocolate, spreads, bakery and confectionery." },
-    { id: "almond", name: "Almond", image: "/images/7golden/almond-category.webp", description: "Almond kernels, slivers, flakes and powder for bakery, chocolate, confectionery and other food applications." }
+    { id: "pistachio", name: "Pistachio", image: "https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/product/pistachio-category.webp", description: "Pistachio kernels, peeled kernels, slivers and powder for chocolate, confectionery, ice cream and other food applications." },
+    { id: "hazelnut", name: "Hazelnut", image: "https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/product/hazelnut-category.webp", description: "Raw and roasted hazelnut kernels, paste, granules and powder for chocolate, spreads, bakery and confectionery." },
+    { id: "almond", name: "Almond", image: "https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/product/almond-category.webp", description: "Almond kernels, slivers, flakes and powder for bakery, chocolate, confectionery and other food applications." }
   ],
   products: [
     { slug: "qazvin-peeled-pistachio", name: "Qazvin Peeled Pistachio Kernels", category: "pistachio", origin: "Qazvin", formats: ["Peeled kernels"], image: "/images/7golden/pistachio-peeled-kernels.webp", description: "Peeled Qazvin pistachio kernels for chocolate, confectionery, ice cream and other food products." },
