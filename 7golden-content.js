@@ -2,6 +2,7 @@
   'use strict';
 
   const BRAND = '7Golden';
+  const DATA = window.SEVENGOLDEN_DATA || {};
   const CONTACT = {
     office: '+98 28 3323 4004',
     mobile: '+98 912 182 3438',
@@ -138,7 +139,7 @@
     ['Code coming soon', 'Contact us for details'],
     ['We caught your attention with a non-existent product. If we can sell a coaster, imagine what we can do for your brand.', 'Need hazelnut, pistachio or almond ingredients for your production? Talk to 7Golden about product formats, availability and your requirements.'],
     ['lusion.co', '7golden.co'],
-    ['Built by Lusion with love', '7Golden · Nut processing in Qazvin, Iran'],
+    ['Built by Lusion with love', 'Interactive experience adapted for 7Golden'],
     ["Subscribe to Lusion's Newsletter:", 'Contact 7Golden:'],
     ['New Business:', 'Sales enquiries:'],
     ['hello@lusion.co', CONTACT.email],
@@ -172,7 +173,6 @@
       }
       after = after
         .replace(/oryzo/gi, BRAND)
-        .replace(/Lusion/gi, BRAND)
         .replace(/cork coaster/gi, 'nut ingredients')
         .replace(/coaster/gi, 'nut ingredient')
         .replace(/Powered by AI/gi, 'Processed for food production')
@@ -237,9 +237,11 @@
       }
     }
 
-    for (const link of document.querySelectorAll('a[href*="lusion.co"], a[href^="mailto:hello@"]')) {
-      link.href = link.href.startsWith('mailto:') ? 'mailto:' + CONTACT.email : 'https://7golden.co/';
+    for (const link of document.querySelectorAll('a[href^="mailto:hello@"], a[href^="mailto:business@"]')) {
+      link.href = 'mailto:' + CONTACT.email;
     }
+    const brandCta = document.querySelector('#footer-lusion-link');
+    if (brandCta) brandCta.href = 'https://7golden.co/';
   }
 
   function apply() {
@@ -256,22 +258,20 @@
     if (footerTitle && footerTitle.children.length === 0 && footerTitle.textContent !== 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.') footerTitle.textContent = 'Looking for a nut ingredient supplier? Let’s discuss what your production needs.';
     const productOptions = document.querySelectorAll('#product-hero-options > *');
     if (productOptions.length >= 3) {
-      ['Hazelnut', 'Pistachio', 'Almond'].forEach((label, index) => {
+      (DATA.categories || [{name:'Hazelnut'},{name:'Pistachio'},{name:'Almond'}]).forEach((category, index) => {
+        const label = category.name;
         if (productOptions[index].textContent !== label) productOptions[index].textContent = label;
       });
     }
     const productTitles = document.querySelectorAll('#product-details-title-wrapper span');
     if (productTitles.length >= 3) {
-      ['Hazelnut', 'Pistachio', 'Almond'].forEach((label, index) => {
+      (DATA.categories || [{name:'Pistachio'},{name:'Hazelnut'},{name:'Almond'}]).forEach((category, index) => {
+        const label = category.name;
         if (productTitles[index].textContent !== label) productTitles[index].textContent = label;
       });
     }
     const productDescriptions = document.querySelectorAll('#product-details-desc-wrapper > div');
-    const descriptions = [
-      'Hazelnut products include kernels and processed forms such as paste, granules and powder, depending on availability.',
-      'Pistachio products include kernels, peeled kernels, slivers and powder, depending on availability.',
-      'Almond products include kernels and processed forms such as slivers, flakes and powder, depending on availability.'
-    ];
+    const descriptions = (DATA.categories || []).map((category) => category.description).filter(Boolean);
     if (productDescriptions.length >= 3) descriptions.forEach((value, index) => {
       if (productDescriptions[index].children.length === 0 && productDescriptions[index].textContent !== value) productDescriptions[index].textContent = value;
     });
