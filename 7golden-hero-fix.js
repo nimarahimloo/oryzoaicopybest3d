@@ -18,8 +18,8 @@
     const desc = document.querySelector('#hero-card-desc');
     if (desc && desc.textContent.trim() !== 'Premium hazelnut, pistachio & almond ingredients.') desc.textContent = 'Premium hazelnut, pistachio & almond ingredients.';
     const thumb = document.querySelector('#hero-video-thumbnail');
-    if (thumb && thumb.getAttribute('src') !== '/images/7golden/pistachio-bowl-green.webp') {
-      thumb.src = '/images/7golden/pistachio-bowl-green.webp';
+    if (thumb && thumb.getAttribute('src') !== 'https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/banner/hero-nuts-bowl.webp') {
+      thumb.src = 'https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/banner/hero-nuts-bowl.webp';
       thumb.alt = '7Golden pistachio ingredients';
     }
     setText('#hero-video-play', heroCopy.play);
