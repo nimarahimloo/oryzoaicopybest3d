@@ -237,9 +237,11 @@
       }
     }
 
-    for (const link of document.querySelectorAll('a[href*="lusion.co"], a[href^="mailto:hello@"]')) {
-      link.href = link.href.startsWith('mailto:') ? 'mailto:' + CONTACT.email : 'https://7golden.co/';
+    for (const link of document.querySelectorAll('a[href^="mailto:hello@"], a[href^="mailto:business@"]')) {
+      link.href = 'mailto:' + CONTACT.email;
     }
+    const brandCta = document.querySelector('#footer-lusion-link');
+    if (brandCta) brandCta.href = 'https://7golden.co/';
   }
 
   function apply() {
@@ -263,7 +265,8 @@
     }
     const productTitles = document.querySelectorAll('#product-details-title-wrapper span');
     if (productTitles.length >= 3) {
-      ['Hazelnut', 'Pistachio', 'Almond'].forEach((label, index) => {
+      (DATA.categories || [{name:'Pistachio'},{name:'Hazelnut'},{name:'Almond'}]).forEach((category, index) => {
+        const label = category.name;
         if (productTitles[index].textContent !== label) productTitles[index].textContent = label;
       });
     }
