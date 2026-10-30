@@ -8,12 +8,14 @@
   const products = Array.isArray(DATA.products) ? DATA.products : [];
   const categories = Array.isArray(DATA.categories) ? DATA.categories : [];
   const gallery = [
-    'https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/gallery/AQ8A1499AQ8A1499.webp',
-    'https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/gallery/AQ8A1505AQ8A1505.webp',
-    'https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/gallery/AQ8A1520AQ8A1520.webp',
-    'https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/gallery/AQ8A1640AQ8A1640.webp',
-    'https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/gallery/AQ8A1579AQ8A1579.webp',
-    'https://raw.githubusercontent.com/nimarahimloo/7golden/main/public/gallery/AQ8A1742AQ8A1742.webp'
+    '/images/7golden/pistachio-peeled-kernels.webp',
+    '/images/7golden/pistachio-powder.webp',
+    '/images/7golden/pistachio-slivers.webp',
+    '/images/7golden/pistachio-kernels.webp',
+    '/images/7golden/hazelnut-kernels.webp',
+    '/images/7golden/hazelnut-granules.webp',
+    '/images/7golden/almond-powder.webp',
+    '/images/7golden/peanut-slivers.webp'
   ];
 
   const text = (selector, value) => {
